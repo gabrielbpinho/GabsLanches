@@ -1,7 +1,7 @@
-﻿using LanchesMac.Repositories.Interfaces;
+﻿using GabsLanches.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LanchesMac.Components
+namespace GabsLanches.Components
 {
     public class CategoriaMenu : ViewComponent
     {
@@ -14,7 +14,7 @@ namespace LanchesMac.Components
 
         public IViewComponentResult Invoke()
         {
-            var categorias = _categoriaRepository.Categorias.OrderBy(c => c.CategoriaNome);
+            var categorias = _categoriaRepository.GetCategorias.OrderBy(c => c.CategoriaNome);
             return View(categorias);
         }
     }
