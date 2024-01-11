@@ -44,7 +44,7 @@ namespace GabsLanches.Migrations
 
                     b.HasIndex("LancheId");
 
-                    b.ToTable("CarrinhoCompraItems");
+                    b.ToTable("CarrinhoCompraItens");
                 });
 
             modelBuilder.Entity("GabsLanches.Models.Categoria", b =>

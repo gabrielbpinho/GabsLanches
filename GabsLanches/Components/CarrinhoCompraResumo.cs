@@ -2,7 +2,7 @@
 using GabsLanches.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LanchesMac.Components
+namespace GabsLanches.Components
 {
     public class CarrinhoCompraResumo : ViewComponent
     {
