@@ -1,4 +1,5 @@
-﻿using GabsLanches.Repositories.Interfaces;
+﻿using GabsLanches.Models;
+using GabsLanches.Repositories.Interfaces;
 using GabsLanches.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -14,16 +15,45 @@ namespace GabsLanches.Controllers
             _lancheRepository = lancheRepository;
         }
 
-        public IActionResult List()
+        public IActionResult List(string categoria)
         {
-            var lanchesListViewModel = new LancheListViewModel();
+            IEnumerable<Lanche> lanches = new List<Lanche>();
+            string categoriaAtual = string.Empty;
 
-            lanchesListViewModel.Lanches = _lancheRepository.GetLanches;
-            lanchesListViewModel.CategoriaAtual = "Categoria atual";
+            if (string.IsNullOrEmpty(categoria))
+            {
+                lanches = _lancheRepository.GetLanches.OrderBy(l => l.Nome);
+                categoriaAtual = "Todas os laches";
+            }
+            else
+            {
+                lanches = _lancheRepository.GetLanches
+                                .Where(l => l.Categoria.CategoriaNome
+                                .Equals(categoria))
+                                .OrderBy(l => l.Nome);
+
+                categoriaAtual = categoria;
+
+            }
+
+            var lanchesListViewModel = new LancheListViewModel
+            {
+
+                Lanches = lanches,
+                CategoriaAtual = categoriaAtual
+
+            };
 
             return View(lanchesListViewModel);
         }
-    
+
+        public ActionResult Details(int lancheId)
+        {
+            var lanche = _lancheRepository.GetLanches.FirstOrDefault(l => l.LancheId == lancheId);
+
+            return View(lanche);
+        }
+
     }
     
 }
