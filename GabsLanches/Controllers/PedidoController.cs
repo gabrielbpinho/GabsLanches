@@ -1,6 +1,7 @@
 ﻿using GabsLanches.Models;
 using GabsLanches.Repositories;
 using GabsLanches.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -17,12 +18,14 @@ namespace GabsLanches.Controllers
             _carrinhoCompra = carrinhoCompra;
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Checkout() 
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Checkout(Pedido pedido) 
         {
@@ -57,7 +60,7 @@ namespace GabsLanches.Controllers
 
                 _carrinhoCompra.LimpaCarrinho();
 
-                return View("~/View/Pedido/CheckoutComple.cshtml", pedido);
+                return View("~/Views/Pedido/CheckoutCompleto.cshtml", pedido);
             }
             return View(pedido);
         }
