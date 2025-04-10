@@ -45,7 +45,7 @@ namespace GabsLanches.Models
 
         [Required(ErrorMessage = "O Estoque do lanche deve ser informada")]
         [Display(Name = "Estoque")]
-        public string EmEstoque { get; set; }
+        public bool EmEstoque { get; set; }
 
         public int CategoriaId { get; set; }
 
