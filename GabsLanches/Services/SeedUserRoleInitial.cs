@@ -45,7 +45,7 @@ namespace GabsLanches.Services
                 user.LockoutEnabled = false;
                 user.SecurityStamp = Guid.NewGuid().ToString();
 
-                IdentityResult result = _userManager.CreateAsync(user,"Numsey#2022").Result;
+                IdentityResult result = _userManager.CreateAsync(user,"").Result;
 
                 if(result.Succeeded)
                 {
@@ -64,7 +64,7 @@ namespace GabsLanches.Services
                 user.LockoutEnabled = false;
                 user.SecurityStamp = Guid.NewGuid().ToString();
 
-                IdentityResult result = _userManager.CreateAsync(user, "Numsey#2022").Result;
+                IdentityResult result = _userManager.CreateAsync(user,"" ).Result;
 
                 if (result.Succeeded)
                 {
