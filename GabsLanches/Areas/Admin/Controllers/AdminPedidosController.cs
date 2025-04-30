@@ -1,5 +1,6 @@
 ﻿using GabsLanches.Context;
 using GabsLanches.Models;
+using GabsLanches.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -164,6 +165,28 @@ namespace GabsLanches.Areas.Admin.Controllers
         private bool PedidoExists(int id)
         {
             return _context.Pedidos.Any(e => e.PedidoId == id);
+        }
+
+        public IActionResult PedidoLanches(int? id)
+        {
+            var pedido = _context.Pedidos
+                .Include(pd => pd.PedidoItens)
+                .ThenInclude(l => l.Lanche)
+                .FirstOrDefault(p => p.PedidoId == id);
+
+            if (pedido == null)
+            {
+                Response.StatusCode = 404;
+                return View("Pedido Não Encontrado!", id.Value);
+            }
+
+            PedidoLancheViewModel pedidoLanches = new PedidoLancheViewModel()
+            {
+                Pedido = pedido,
+                PedidoDetalhes = pedido.PedidoItens
+            };
+
+            return View(pedidoLanches);
         }
     }
 }
