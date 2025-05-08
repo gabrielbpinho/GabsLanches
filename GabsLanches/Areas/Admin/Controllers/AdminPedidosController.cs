@@ -177,7 +177,7 @@ namespace GabsLanches.Areas.Admin.Controllers
             if (pedido == null)
             {
                 Response.StatusCode = 404;
-                return View("Pedido Não Encontrado!", id.Value);
+                return View("PedidoNaoEncontrado", id.Value);
             }
 
             PedidoLancheViewModel pedidoLanches = new PedidoLancheViewModel()
