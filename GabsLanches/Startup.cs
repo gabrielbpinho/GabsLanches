@@ -1,4 +1,5 @@
-﻿using GabsLanches.Context;
+﻿using GabsLanches.Areas.Admin.Servicos;
+using GabsLanches.Context;
 using GabsLanches.Models;
 using GabsLanches.Repositories;
 using GabsLanches.Repositories.Interfaces;
@@ -43,6 +44,9 @@ public class Startup
         services.AddTransient<ICategoriaRepository, CategoriaRepository>();
         services.AddTransient<IPedidoRepository, PedidoRepository>();
         services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+
+        services.AddScoped<RelatorioVendasService>();
+        services.AddScoped<GraficoVendasService>();
 
         services.AddAuthorization(options =>
         {
